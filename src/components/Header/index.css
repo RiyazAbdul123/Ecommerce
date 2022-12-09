@@ -1,0 +1,31 @@
+
+.website-logo{
+    width: 100px;
+    height: auto;
+}
+
+.header-product{
+    color: white;
+    margin-right:10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.header-ul{
+    margin-left: -30px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.container-header{
+    padding-top:20px;
+    padding-bottom:20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
