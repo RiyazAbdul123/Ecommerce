@@ -1,0 +1,10 @@
+.container-product{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
+
+.product-content{
+    margin-left: 20px;
+}
