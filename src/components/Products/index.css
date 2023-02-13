@@ -1,11 +1,12 @@
 .container-products{
-    
+    min-height: 100vh;
+    padding-top:40px;
 }
 
 .products-ul{
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -37,4 +38,9 @@
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
+}
+
+.product-img{
+    width:auto;
+    height: 100px;
 }

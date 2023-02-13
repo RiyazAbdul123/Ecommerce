@@ -1,94 +1,55 @@
+import { Component } from "react";
 import { Link } from "react-router-dom"
 import Header from "../Header";
 import Footer from "../Footer";
 import "./index.css";
 
-const productsData = [
-    {
-        id: 1,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    },
-    {
-        id: 2,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    },
-    {
-        id: 3,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    },
-    {
-        id: 1,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    },
-    {
-        id: 2,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    },
-    {
-        id: 3,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    }, {
-        id: 1,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    },
-    {
-        id: 2,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
-    },
-    {
-        id: 3,
-        productName: "Fogg",
-        price: 249,
-        imageUrl:
-            "https://res.cloudinary.com/dxnhvq8pl/image/upload/v1656827930/movie%20app%20mini%20project/NativebaseLogo_zo5r6r.png",
+class Products extends Component {
+    state = {
+        products: []
     }
-];
 
-function Products() {
-    return (
-        <div className="container-website">
-            <Header />
-            <div className="container-products">
-                <ul className="products-ul">
-                    {productsData.map((product) => (
-                        <Link to={`/products/${product.id}`}>
+    componentDidMount() {
+        this.getProducts()
+    }
+
+    getProducts = async () => {
+        const productsUrl = "http://localhost:3002/products"
+        const option = {
+            method: "GET"
+        }
+        const productsRespons = await fetch(productsUrl, option)
+        console.log("products Response >> ", productsRespons)
+        const data = await productsRespons.json()
+        console.log("data >> ", data)
+        this.setState({ products: [...data.data] })
+    }
+
+
+    render() {
+        const { products } = this.state
+        console.log("products render >> ", products)
+        return (
+            <div className="container-website">
+                <Header />
+                <div className="container-products">
+                    <ul className="products-ul">
+                        {products.map((product) => (
                             <li key={product.id} className="product-li">
-                                <img src={product.imageUrl} alt={product.productName} />
-                                <h1 className="product-name">{product.productName}</h1>
+                                <Link to={`/products/${product.id}`}>
+                                    <img className="product-img" src={product.image_url} alt={product.product_name} />
+                                    <h1 className="product-name">{product.product_name}</h1>
+                                </Link>
                                 <button className="add-to-cart-button">Add To Cart</button>
                                 <p className="product-price">RS.{product.price}/-</p>
                             </li>
-                        </Link>
-                    ))}
-                </ul>
-            </div>
-            <Footer />
-        </div>
-    );
+                        ))}
+                    </ul>
+                </div>
+                <Footer />
+            </div >
+        );
+    }
 }
 
 export default Products;
